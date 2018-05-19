@@ -450,24 +450,35 @@ void render_scene()
 
 void display(void)
 {
-	glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
+	glClearColor(1.0f, 1.0f, 1.0f, 0.0f);
 	glClear(GL_COLOR_BUFFER_BIT);
+	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 
-	render_scene();
+	glColor3f(1, 0, 0);
+	glBegin(GL_LINE_STRIP);
+	glVertex3f(-0.9f, -0.9f, -0.9f);
+	glVertex3f(0.9f, -0.9f, -0.9f);
+	glEnd();
+
+	glColor3f(1, 0, 0);
+	glBegin(GL_LINE_STRIP);
+	glVertex3f(-0.9f, -0.7f, -0.9f);
+	glVertex3f(0.9f, -0.7f, 3.1f);
+	glEnd();
+
+	//render_scene();
 	glutSwapBuffers();
 }
 
 void reshape(int width, int height)
 {
-	glDisable(GL_DEPTH_TEST);
-	glViewport(0, 0, width, height);
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
-	glOrtho(0, width - 1, height - 1, 0, 0, 1);
-	glMatrixMode(GL_MODELVIEW);
-	GLOBAL_STATE.changed_window_dimensions(width, height);
+	
+	glViewport(0, 0, width, height);
 
+	GLOBAL_STATE.changed_window_dimensions(width, height);
 }
 
 void keyPressed(unsigned char key, int x, int y)
